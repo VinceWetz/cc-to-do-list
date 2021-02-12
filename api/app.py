@@ -7,14 +7,14 @@ from flask_restful import Api
 from flask_mongoengine import MongoEngine
 
 # local packages
-from api.routes import create_routes
+from src.routes import create_routes
 
 client = MongoClient()
 
 # default mongodb configuration
 default_config = {
     "MONGODB_SETTINGS": {
-        'db': 'list',
+        'db': 'pinDOin',
         'username': 'api',
         'password': '1CbViFMsxyAuW2Gs',
         'authentication_source': 'admin'

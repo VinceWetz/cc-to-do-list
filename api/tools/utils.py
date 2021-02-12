@@ -2,7 +2,8 @@ from flask import jsonify
 from mongoengine.errors import *
 
 
-def generate_json_response(success: bool = True, result=[], error: str = None):
+def generate_json_response(success: bool = True, result: list = list,
+                           error: str = None):
     """Generate a consistant API output for an easier frontend handling.
 
     :param success: Request was successful or not

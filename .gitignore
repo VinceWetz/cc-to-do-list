@@ -1,5 +1,7 @@
 .idea
-src/venv
+api/venv
 
 example.py
 DOCUMENTATION.md
+
+*__pycache__/
