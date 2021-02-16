@@ -5,6 +5,7 @@ from flask import Flask, app
 from pymongo import MongoClient
 from flask_restful import Api
 from flask_mongoengine import MongoEngine
+from flask_cors import CORS
 
 # local packages
 from src.routes import create_routes
@@ -43,6 +44,7 @@ def get_flask_app(config: dict = None) -> app.Flask:
     config = default_config if config is None else config
     flask_app.config.update(config)
     flask_app.config['JSON_AS_ASCII'] = False
+    CORS(flask_app, resources=r'/*', supports_credentials=True)
 
     api = Api(app=flask_app)
     create_routes(api=api)
