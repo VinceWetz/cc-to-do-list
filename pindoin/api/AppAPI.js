@@ -96,7 +96,7 @@ export default class AppAPI {
     };
 
     createTODO(list, todo) {
-        return this.#fetchAdv(this.#createTODO(list.getId()), {
+        return this.#fetchAdv(this.#createTODO(list.getListId()), {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain',
@@ -112,7 +112,7 @@ export default class AppAPI {
     };
 
     updateTODO(list, todo) {
-        return this.#fetchAdv(this.#updateTODO(list.getId(), todo.getId()), {
+        return this.#fetchAdv(this.#updateTODO(list.getListId(), todo.getTodoId()), {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json, text/plain',
@@ -129,7 +129,7 @@ export default class AppAPI {
 
 
     deleteTODO(list, todo) {
-        return this.#fetchAdv(this.#deleteTODO(list.getId(), todo.getId()), {
+        return this.#fetchAdv(this.#deleteTODO(list.getListId(), todo.getTodoId()), {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json, text/plain',
