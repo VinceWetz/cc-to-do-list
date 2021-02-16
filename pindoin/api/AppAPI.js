@@ -49,7 +49,7 @@ export default class AppAPI {
         return this.#fetchAdv(this.#getList(listId)).then((responseJSON) => {
             let responseLists = List.fromJSON(responseJSON);
             return new Promise(function (resolve) {
-                resolve(responseUsers)
+                resolve(responseLists)
             })
         })
     };

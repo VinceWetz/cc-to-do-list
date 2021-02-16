@@ -3,6 +3,7 @@ import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
 import { nanoid } from "nanoid";
+import AppAPI from "pindoin/api/AppAPI.js"
 
 const FILTER_MAP = {
   All: () => true,
@@ -36,6 +37,35 @@ function App(props) {
     const remainingTasks = tasks.filter(task => id !== task.id);
     setTasks(remainingTasks);
   }
+
+
+  loadListEntries = async () => {
+    // get listentries by user ID
+    const listEntries = await AppAPI.getAPI().getListEntriesByShoppingListId(this.state.shoppingListId)
+    for (const listEntry of listEntries) {
+        await AppAPI.getAPI().completeListEntry(listEntry)
+    }
+    var listEntryTableElements = listEntries.map((listEntry) => 
+        <ListEntry 
+            listEntry={listEntry} 
+            loadListEntries={this.loadListEntries} 
+            retailers={this.state.retailers}
+            users={this.state.users}
+            articles={this.state.articles}
+            loadArticles={this.loadArticles}
+            groupId={this.state.groupId}
+        />
+    )
+
+    this.setState({
+        listEntryTableElements: listEntryTableElements,
+        filteredListEntryTableElements: listEntryTableElements,
+        loadingInProgress: true, // loading indicator 
+        loadingError: null,
+    })
+  } 
+
+
 
   function editTask(id, newName) {
     const editedTaskList = tasks.map(task => {
