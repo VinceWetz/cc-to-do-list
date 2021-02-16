@@ -3,7 +3,7 @@ import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
 import { nanoid } from "nanoid";
-import AppAPI from "pindoin/api/AppAPI.js"
+import AppAPI from "../api/AppAPI"
 
 const FILTER_MAP = {
   All: () => true,
@@ -39,32 +39,29 @@ function App(props) {
   }
 
 
-  loadListEntries = async () => {
+  function loadListEntries() {
     // get listentries by user ID
-    const listEntries = await AppAPI.getAPI().getListEntriesByShoppingListId(this.state.shoppingListId)
-    for (const listEntry of listEntries) {
-        await AppAPI.getAPI().completeListEntry(listEntry)
-    }
-    var listEntryTableElements = listEntries.map((listEntry) => 
-        <ListEntry 
-            listEntry={listEntry} 
-            loadListEntries={this.loadListEntries} 
-            retailers={this.state.retailers}
-            users={this.state.users}
-            articles={this.state.articles}
-            loadArticles={this.loadArticles}
-            groupId={this.state.groupId}
-        />
-    )
+    const TODOs = await AppAPI.getAPI().getTODOs("abc123");//this.state.shoppingListId)
 
-    this.setState({
-        listEntryTableElements: listEntryTableElements,
-        filteredListEntryTableElements: listEntryTableElements,
-        loadingInProgress: true, // loading indicator 
-        loadingError: null,
-    })
+    var TODOElements = TODOs.map((todo) => 
+      <Todo
+        id={todo.getTodoId()}
+        name={todo.getTask()}
+        completed={todo.getChecked()}
+        key={task.getTodoId()}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        editTask={editTask}
+      />
+    )
+    return TODOElements
+    //this.setState({
+    //  TODOElements: TODOElements
+    //})
   } 
 
+  const te = loadListEntries()
+  console.log(te)
 
 
   function editTask(id, newName) {
