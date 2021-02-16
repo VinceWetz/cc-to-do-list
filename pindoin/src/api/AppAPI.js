@@ -6,7 +6,7 @@ export default class AppAPI {
 
     static #api = null;
 
-    #appServerBaseURL = 'http://127.0.0.1:5000';
+    #appServerBaseURL = 'http://localhost:5000';
 
     // fetch and return list of json objects
 
@@ -35,6 +35,7 @@ export default class AppAPI {
     // immediately returns list of json objects after fetching
     #fetchAdv = (url, init={credentials: 'include'}) => fetch(url, init)
         .then(response => {
+            console.log(response);
             if (!response.ok){
                 console.log(`${response.status} ${response.statusText}`);
                 throw Error(`${response.status} ${response.statusText}`)
@@ -88,6 +89,7 @@ export default class AppAPI {
     // todo related API call methods
     getTODOs(listId) {
         return this.#fetchAdv(this.#getTODOs(listId)).then((responseJSON) => {
+            console.log(responseJSON)
             let responseTODOs = TODO.fromJSON(responseJSON);
             return new Promise(function (resolve) {
                 resolve(responseTODOs)

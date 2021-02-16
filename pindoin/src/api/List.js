@@ -1,4 +1,4 @@
-import BusinessObject from './BusinessObject';
+import BusinessObject from './BusinessObjects';
 import TODO from  './TODO';
 
 export default class List extends BusinessObject{
@@ -30,7 +30,7 @@ getListId(){
 }
 
 getTaskName(){
-    return task
+    return this.task
 }
     // Array List
     static fromJSON(list) {
