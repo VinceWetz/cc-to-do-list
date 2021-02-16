@@ -3,7 +3,7 @@ import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
 import { nanoid } from "nanoid";
-import AppAPI from "../api/AppAPI"
+import AppAPI from "./api/AppAPI.js"
 
 const FILTER_MAP = {
   All: () => true,
@@ -39,16 +39,16 @@ function App(props) {
   }
 
 
-  function loadListEntries() {
+  async function loadListEntries() {
     // get listentries by user ID
     const TODOs = await AppAPI.getAPI().getTODOs("abc123");//this.state.shoppingListId)
-
+    console.log(TODOs)
     var TODOElements = TODOs.map((todo) => 
       <Todo
         id={todo.getTodoId()}
         name={todo.getTask()}
         completed={todo.getChecked()}
-        key={task.getTodoId()}
+        key={todo.getTodoId()}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
         editTask={editTask}

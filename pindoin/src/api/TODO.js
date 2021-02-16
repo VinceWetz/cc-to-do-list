@@ -1,4 +1,4 @@
-import BusinessObject from './BusinessObject';
+import BusinessObject from './BusinessObjects';
 import List from './List';
 
 export default class TODO extends BusinessObject{
@@ -54,6 +54,7 @@ export default class TODO extends BusinessObject{
     // Array TODO's
     static fromJSON(todo) {
         let result = [];
+        console.log(todo)
         if (Array.isArray(todo)) {
             todo.forEach((c) => {
                 Object.setPrototypeOf(c, TODO.prototype)
