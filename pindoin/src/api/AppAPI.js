@@ -33,14 +33,13 @@ export default class AppAPI {
     }
 
     // immediately returns list of json objects after fetching
-    #fetchAdv = (url, init={credentials: 'include'}) => fetch(url, init)
+    #fetchAdv = (url, init={}) => fetch(url, init)
         .then(response => {
-            console.log(response);
             if (!response.ok){
                 console.log(`${response.status} ${response.statusText}`);
                 throw Error(`${response.status} ${response.statusText}`)
             }
-            return response.json()["result"];
+            return response.json().then((responseJSON) => {return responseJSON.result});
         });
 
 
@@ -89,7 +88,6 @@ export default class AppAPI {
     // todo related API call methods
     getTODOs(listId) {
         return this.#fetchAdv(this.#getTODOs(listId)).then((responseJSON) => {
-            console.log(responseJSON)
             let responseTODOs = TODO.fromJSON(responseJSON);
             return new Promise(function (resolve) {
                 resolve(responseTODOs)
