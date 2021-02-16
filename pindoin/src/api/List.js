@@ -43,7 +43,7 @@ getTaskName(){
         } else {
             // single object
             let c = list;
-            Object.setPrototypeOf(c, TODO.prototype)
+            Object.setPrototypeOf(c, List.prototype)
             result.push(c)
         }
         return result;

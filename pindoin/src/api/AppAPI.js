@@ -35,6 +35,7 @@ export default class AppAPI {
     // immediately returns list of json objects after fetching
     #fetchAdv = (url, init={}) => fetch(url, init)
         .then(response => {
+            console.log(url)
             if (!response.ok){
                 console.log(`${response.status} ${response.statusText}`);
                 throw Error(`${response.status} ${response.statusText}`)

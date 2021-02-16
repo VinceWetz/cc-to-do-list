@@ -41,7 +41,10 @@ function App(props) {
 
   async function loadListEntries() {
     // get listentries by user ID
-    const TODOs = await AppAPI.getAPI().getTODOs("abc123");//this.state.shoppingListId)
+    const TODOs = await AppAPI.getAPI().getTODOs("abc123")
+    console.log(TODOs)
+
+
     var TODOElements = TODOs.map((todo) => 
       <Todo
         id={todo.getTodoId()}
@@ -53,14 +56,23 @@ function App(props) {
         editTask={editTask}
       />
     )
+    console.log(TODOElements)
     return TODOElements
-    //this.setState({
-    //  TODOElements: TODOElements
-    //})
-  } 
 
-  const taskList2 = loadListEntries()
-  console.log(taskList2)
+  }
+
+
+  console.log(1)
+  const listEntries = loadListEntries()
+  const taskList2 = listEntries.then((x) => {return x})
+
+  console.log(2)
+  // const taskList2 = loadListEntries().then((TODOElements) => {
+  //  console.log(TODOElements)
+  //  return TODOElements 
+  // })
+  // console.log(taskList2)
+  // console.log("executed")
 
 
   function editTask(id, newName) {

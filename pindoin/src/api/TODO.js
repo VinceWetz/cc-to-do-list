@@ -7,8 +7,8 @@ export default class TODO extends BusinessObject{
         this.todoId = 0;
         this.task = task;
         this.checked = false;
-        this.createTimestamp = new Date().toISOString();
-        this.checkTimestamp = new Date().toISOString();
+        this.createTimestamp = 1613131072144923000 //Math.floor(new Date().getTime())
+        this.checkTimestamp = 1613131072144923000//Math.floor(new Date().getTime())
     }
 
     setTodoId(todoId){

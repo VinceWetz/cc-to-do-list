@@ -9,7 +9,7 @@ export default function Todo(props) {
     function handleChange(e) {
         setNewName(e.target.value);
       }
-
+      
     const editingTemplate = (
         <form className="stack-small" onSubmit={handleSubmit}>
           <div className="form-group">
