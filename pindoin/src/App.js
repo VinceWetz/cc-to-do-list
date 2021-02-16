@@ -42,7 +42,6 @@ function App(props) {
   async function loadListEntries() {
     // get listentries by user ID
     const TODOs = await AppAPI.getAPI().getTODOs("abc123");//this.state.shoppingListId)
-    console.log(TODOs)
     var TODOElements = TODOs.map((todo) => 
       <Todo
         id={todo.getTodoId()}
@@ -60,8 +59,8 @@ function App(props) {
     //})
   } 
 
-  const te = loadListEntries()
-  console.log(te)
+  const taskList2 = loadListEntries()
+  console.log(taskList2)
 
 
   function editTask(id, newName) {
@@ -111,7 +110,7 @@ function App(props) {
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading"
       >
-        {taskList}
+        {taskList2}
       </ul>
     </div>
   );
