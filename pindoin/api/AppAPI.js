@@ -85,7 +85,7 @@ export default class AppAPI {
     };
 
 
-    // todo related API call methdos
+    // todo related API call methods
     getTODOs(listId) {
         return this.#fetchAdv(this.#getTODOs(listId)).then((responseJSON) => {
             let responseTODOs = TODO.fromJSON(responseJSON);
