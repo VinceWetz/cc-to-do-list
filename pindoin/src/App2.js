@@ -25,7 +25,6 @@ class TODOList extends React.Component{
     loadTODOs = async () => {
     // get listentries by user ID
         const TODOs = await AppAPI.getAPI().getTODOs(this.state.list.getListId())
-        console.log(TODOs)
 
         var TODOElements = TODOs.map((todo) => 
             <Todo
@@ -38,7 +37,6 @@ class TODOList extends React.Component{
             editTask={this.updateTODO}
             />
         )
-        console.log(TODOElements)
         this.setState({
             todos: TODOElements
         })
@@ -57,7 +55,7 @@ class TODOList extends React.Component{
         return createdTODO
     }
 
-    deleteTODO = (todoId) => {
+    deleteTODO = async (todoId) => {
         await AppAPI.getAPI().deleteTODO(this.state.list.getListId(), todoId)
         this.loadTODOs()
         }
