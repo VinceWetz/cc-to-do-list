@@ -57,7 +57,7 @@ class TODOList extends React.Component{
         return createdTODO
     }
 
-    deleteTODO = (todoId) => {
+    deleteTODO = async (todoId) => {
         await AppAPI.getAPI().deleteTODO(this.state.list.getListId(), todoId)
         this.loadTODOs()
         }

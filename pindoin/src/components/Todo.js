@@ -43,17 +43,17 @@ class Todo extends React.Component{
   }
 
   editingTemplate = (
-    <form className="stack-small" onSubmit={handleSubmit}>
+    <form className="stack-small" onSubmit={this.handleSubmit}>
       <div className="form-group">
         <label className="todo-label" htmlFor={this.state.id}>
           New name for {this.state.name}
         </label>
         <input
-            id={props.id}
+            id={this.props.id}
             className="todo-text"
             type="text"
-            value={newName}
-            onChange={handleChange}
+            value={this.state.name}
+            onChange={this.handleChange}
             />
       </div>
       <div className="btn-group">
@@ -105,7 +105,7 @@ class Todo extends React.Component{
 
   render() {
     return(
-      <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>
+      <li className="todo">{this.state.editing ? this.editingTemplate : this.viewTemplate}</li>
     //   (
     //     <li className="todo stack-small">
     //       <div className="c-cb">
