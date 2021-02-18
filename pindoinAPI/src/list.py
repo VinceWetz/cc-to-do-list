@@ -10,12 +10,12 @@ from tools.utils import *
 class ListAPI(Resource):
     @error_handler
     def get(self, list_id):
-        output = List.objects(list_id=list_id)
+        output = List.objects(listId=list_id)
         return generate_json_response(result=output)
 
     @error_handler
     def delete(self, list_id):
-        output = {'list_id': List.objects(list_id=list_id).delete()}
+        output = {'listId': List.objects(listId=list_id).delete()}
         return generate_json_response(result=output)
 
 class ListCreateAPI(Resource):

@@ -20,10 +20,10 @@ class ToDo(Document):
     """
 
     # params
-    todo_id = IntField(default=generate_todo_id, unique=True)
-    list_id = StringField(required=True)
+    todoId = IntField(unique=True)
+    listId = StringField(required=True)
     category = StringField(required=True)
     task = StringField(required=True)
     checked = BooleanField(default=False)
-    check_timestamp = IntField(default=0)
-    create_timestamp = IntField(default=time_ns)
+    checkTimestamp = IntField(default=0)
+    createTimestamp = IntField(default=time_ns)

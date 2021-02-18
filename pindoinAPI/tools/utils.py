@@ -14,12 +14,10 @@ def generate_json_response(success: bool = True, result: list = list,
     status_code = 200
     # turn result into a list
     if not isinstance(result, QuerySet):
-        print("yes")
         result = [result]
 
     # add error message to response
     data = {"success": success, "result": result}
-    print(data)
     if error:
         error = error.replace('"', "'")
         data["error"] = {"message": error}
