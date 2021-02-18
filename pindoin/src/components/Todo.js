@@ -42,59 +42,12 @@ class Todo extends React.Component{
     this.setState({editing: false, name: ''});   
   }
 
-<<<<<<< HEAD
   editingTemplate= () => {
     return (
       <form className="stack-small" onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label className="todo-label" htmlFor={this.props.id}>
             New name for {this.props.name}
-=======
-  editingTemplate = (
-    <form className="stack-small" onSubmit={this.handleSubmit}>
-      <div className="form-group">
-        <label className="todo-label" htmlFor={this.state.id}>
-          New name for {this.state.name}
-        </label>
-        <input
-            id={this.props.id}
-            className="todo-text"
-            type="text"
-            value={this.state.name}
-            onChange={this.handleChange}
-            />
-      </div>
-      <div className="btn-group">
-      <button
-        type="button"
-        className="btn todo-cancel"
-        onClick={() => this.setState({
-          editing: true
-        })}
-        >
-        Cancel
-        <span className="visually-hidden">renaming {this.state.name}</span>
-        </button>
-        <button type="submit" className="btn btn__primary todo-edit">
-          Save
-          <span className="visually-hidden">new name for {this.state.name}</span>
-        </button>
-      </div>
-    </form>
-  );
-
-  viewTemplate = (
-    <div className="stack-small">
-      <div className="c-cb">
-          <input
-            id={this.state.id}
-            type="checkbox"
-            defaultChecked={this.state.completed}
-            onChange ={this.handleCheck}
-          />
-          <label className="todo-label" htmlFor={this.state.id}>
-            {this.state.name}
->>>>>>> 1003124e85564bbe4fc5ee63a1af6d76b001714f
           </label>
           <input
               id={this.props.id}
@@ -155,11 +108,7 @@ class Todo extends React.Component{
 
   render() {
     return(
-<<<<<<< HEAD
       <li className="todo">{this.state.editing ? this.editingTemplate() : this.viewTemplate()}</li>
-=======
-      <li className="todo">{this.state.editing ? this.editingTemplate : this.viewTemplate}</li>
->>>>>>> 1003124e85564bbe4fc5ee63a1af6d76b001714f
     //   (
     //     <li className="todo stack-small">
     //       <div className="c-cb">
