@@ -34,7 +34,7 @@ class TODOList extends React.Component{
             completed={todo.getChecked()}
             key={todo.getTodoId()}
             toggleTaskCompleted={todo.getChecked()}
-            deleteTask={this.deleteTODO}
+            deleteTodo={this.deleteTODO}
             editTask={this.updateTODO}
             />
         )
@@ -57,11 +57,11 @@ class TODOList extends React.Component{
         return createdTODO
     }
 
-    deleteTODO = (todo) => {
-        AppAPI.getAPI().deleteTODO(this.state.list, todo).then(() => {
-            // this.props
-            })
+    deleteTODO = (todoId) => {
+        await AppAPI.getAPI().deleteTODO(this.state.list.getListId(), todoId)
+        this.loadTODOs()
         }
+
     updateTODO = (todo) => {
         AppAPI.getAPI().updateTODO(this.state.list, todo).then(() => {
             // this.props

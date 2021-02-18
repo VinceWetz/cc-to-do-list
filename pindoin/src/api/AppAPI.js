@@ -129,8 +129,8 @@ export default class AppAPI {
     };
 
 
-    deleteTODO(list, todo) {
-        return this.#fetchAdv(this.#deleteTODO(list.getListId(), todo.getTodoId()), {
+    deleteTODO(listId, todoId) {
+        return this.#fetchAdv(this.#deleteTODO(listId, todoId), {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json, text/plain',
