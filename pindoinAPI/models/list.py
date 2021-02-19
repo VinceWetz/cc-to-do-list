@@ -16,5 +16,5 @@ class List(Document):
     """
 
     # params
-    list_id = StringField(db_field="listId", default=generate_list_id, unique=True)
-    create_timestamp = IntField(db_field="createTimestamp", default=time_ns)
+    listId = StringField(db_field="listId", default=generate_list_id, unique=True)
+    createTimestamp = IntField(db_field="createTimestamp", default=time_ns)
