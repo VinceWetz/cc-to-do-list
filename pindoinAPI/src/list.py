@@ -10,7 +10,7 @@ from tools.utils import *
 class GetList(Resource):
     @error_handler
     def get(self, list_id):
-        output = List.objects(listId=list_id)
+        output = List.objects(list_id=list_id)
         return generate_json_response(result=output)
 
 class CreateList(Resource):
@@ -24,5 +24,5 @@ class CreateList(Resource):
 class DeleteList(Resource):
     @error_handler
     def post(self, list_id):
-        output = {'listId': List.objects(listId=list_id).delete()}
+        output = {'list_id': List.objects(list_id=list_id).delete()}
         return generate_json_response(result=output)
