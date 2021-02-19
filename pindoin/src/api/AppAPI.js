@@ -15,14 +15,14 @@ export default class AppAPI {
     // list related endpoints
     #getList = (listId) => `${this.#appServerBaseURL}/list/${listId}`;
     #createList = () => `${this.#appServerBaseURL}/lists/create`;
-    #deleteList = (listId) => `${this.#appServerBaseURL}/list/${listId}`;
+    #deleteList = (listId) => `${this.#appServerBaseURL}/list/${listId}/delete`;
 
 
     // todo related endpoints
     #getTODOs = (listId) => `${this.#appServerBaseURL}/list/${listId}/todos`;
     #createTODO = (listId) => `${this.#appServerBaseURL}/list/${listId}/todos/create`;
-    #updateTODO = (listId, todoId) => `${this.#appServerBaseURL}/list/${listId}/todo/${todoId}}`;
-    #deleteTODO = (listId, todoId) => `${this.#appServerBaseURL}/list/${listId}/todo/${todoId}}`;
+    #updateTODO = (listId, todoId) => `${this.#appServerBaseURL}/list/${listId}/todo/${todoId}/update`;
+    #deleteTODO = (listId, todoId) => `${this.#appServerBaseURL}/list/${listId}/todo/${todoId}/delete`;
 
     // get the API object, create if not exists already
     static getAPI() {
@@ -35,7 +35,11 @@ export default class AppAPI {
     // immediately returns list of json objects after fetching
     #fetchAdv = (url, init={}) => fetch(url, init)
         .then(response => {
-            console.log(url)
+            if ("method" in init) {
+                console.log(init["method"], url)
+            } else {
+                console.log("GET", url)
+            }
             if (!response.ok){
                 console.log(`${response.status} ${response.statusText}`);
                 throw Error(`${response.status} ${response.statusText}`)
@@ -114,12 +118,12 @@ export default class AppAPI {
 
     updateTODO(list, todo) {
         return this.#fetchAdv(this.#updateTODO(list.getListId(), todo.getTodoId()), {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain',
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify(list)
+            body: JSON.stringify(todo)
         }).then((responseJSON) => {
             let responseTODO = TODO.fromJSON(responseJSON)[0];
             return new Promise(function (resolve) {
@@ -131,7 +135,7 @@ export default class AppAPI {
 
     deleteTODO(listId, todoId) {
         return this.#fetchAdv(this.#deleteTODO(listId, todoId), {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain',
                 'Content-type': 'application/json',

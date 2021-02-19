@@ -4,128 +4,77 @@ import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
 import { nanoid } from "nanoid";
 import AppAPI from "./api/AppAPI.js"
-
-const FILTER_MAP = {
-  All: () => true,
-  Active: task => !task.completed,
-  Completed: task => task.completed
-};
-
-const FILTER_NAMES = Object.keys(FILTER_MAP);
-
-function App(props) {
-
-  const [tasks, setTasks] = useState(props.tasks);
-  const [filter, setFilter] = useState('All');
-  
-  function addTask(name) {
-    const newTask = { id: "todo-" + nanoid(), name: name, completed: false };
-    setTasks([...tasks, newTask]);
-  }
-
-  function toggleTaskCompleted(id) {
-    const updatedTasks = tasks.map(task => {
-      if (id === task.id) {
-        return {...task, completed: !task.completed}
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
-  }
-
-  function deleteTask(id) {
-    const remainingTasks = tasks.filter(task => id !== task.id);
-    setTasks(remainingTasks);
-  }
+import TODO from "./api/TODO";
 
 
-  async function loadListEntries() {
+class TODOList extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            todos: [],
+            list: this.props.list,
+        };
+    }
+
+    componentDidMount() {
+        if(this.state.list) {
+            this.loadTODOs()
+        }
+    }
+
+    loadTODOs = async () => {
     // get listentries by user ID
-    const TODOs = await AppAPI.getAPI().getTODOs("abc123")
-    console.log(TODOs)
+        const TODOs = await AppAPI.getAPI().getTODOs(this.state.list.getListId())
 
+        var TODOElements = TODOs.map((todo, index) => 
+            <Todo
+                key={index}
+                todo={todo}
+                deleteTodo={this.deleteTODO}
+                updateTodo={this.updateTODO}
+            />
+        )
+        this.setState({
+            todos: TODOElements
+        })
+    }
 
-    var TODOElements = TODOs.map((todo) => 
-      <Todo
-        id={todo.getTodoId()}
-        name={todo.getTask()}
-        completed={todo.getChecked()}
-        key={todo.getTodoId()}
-        toggleTaskCompleted={toggleTaskCompleted}
-        deleteTask={deleteTask}
-        editTask={editTask}
-      />
-    )
-    console.log(TODOElements)
-    return TODOElements
+    addTODO = async (task) => {
+        const newTODO = new TODO("business", task)
+        const createdTODO = await AppAPI.getAPI().createTODO(this.state.list, newTODO)
+        this.loadTODOs()
 
-  }
+        return createdTODO
+    }
 
+    deleteTODO = async (todoId) => {
+        await AppAPI.getAPI().deleteTODO(this.state.list.getListId(), todoId)
+        this.loadTODOs()
+        }
 
-  console.log(1)
-  const listEntries = loadListEntries()
-  const taskList2 = listEntries.then((x) => {return x})
+    updateTODO = async (todo) => {
+        await AppAPI.getAPI().updateTODO(this.state.list, todo)
+        this.loadTODOs()
+    }
+    
 
-  console.log(2)
-  // const taskList2 = loadListEntries().then((TODOElements) => {
-  //  console.log(TODOElements)
-  //  return TODOElements 
-  // })
-  // console.log(taskList2)
-  // console.log("executed")
-
-
-  function editTask(id, newName) {
-    const editedTaskList = tasks.map(task => {
-      if (id === task.id) {
-        return {...task, name: newName}
-      }
-      return task;
-    });
-    setTasks(editedTaskList);
-  }
-
-  const taskList = tasks
-  .filter(FILTER_MAP[filter])
-  .map(task => (
-    <Todo
-      id={task.id}
-      name={task.name}
-      completed={task.completed}
-      key={task.id}
-      toggleTaskCompleted={toggleTaskCompleted}
-      deleteTask={deleteTask}
-      editTask={editTask}
-    />
-));
-
-  const filterList = FILTER_NAMES.map(name => (
-    <FilterButton
-      key={name}
-      name={name}
-      isPressed={name === filter}
-      setFilter={setFilter}
-    />
-  ));
-
-  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
-  const headingText = `${taskList.length} ${tasksNoun} remaining`;
-  return (
-    <div className="todoapp stack-large">
-      <Form addTask={addTask} />
-      <div className="filters btn-group stack-exception">
-      {filterList}
-      </div>
-      <h2 id="list-heading">{headingText}</h2>
-      <ul
-        role="list"
-        className="todo-list stack-large stack-exception"
-        aria-labelledby="list-heading"
-      >
-        {taskList2}
-      </ul>
-    </div>
-  );
+render(){
+    return (
+        <div className="todoapp stack-large">
+            <h2 id="list-heading">{"List: " + this.state.list.getListId()}</h2>  
+          <Form addTODO={this.addTODO} />
+          <div className="filters btn-group stack-exception">
+          </div>
+          <ul
+            role="list"
+            className="todo-list stack-large stack-exception"
+            aria-labelledby="list-heading"
+          >
+            {this.state.todos}
+          </ul>
+        </div>
+      );
+    }
 }
 
-export default App;
+export default TODOList;
