@@ -85,7 +85,7 @@ function App() {
     return (
         <Router>
                 <Switch>
-                    <Route path="/list/:list_id" render={(props) => <ListRoute listId={props.match.params.list_id}/>} />
+                    <Route path="/list/:listId" render={(props) => <ListRoute listId={props.match.params.listId}/>} />
                     <Route path="/" children={<WelcomePage />} />
 
                 </Switch>
