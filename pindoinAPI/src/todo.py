@@ -29,7 +29,6 @@ class UpdateToDo(Resource):
         data = request.get_json()
         data["listId"] = list_id
         data["todoId"] = todo_id
-        print(data)
         del data["_id"]
         post_user = ToDo.objects(todoId=todo_id, listId=list_id).update(**data)
         output = post_user
