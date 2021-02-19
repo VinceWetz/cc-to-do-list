@@ -6,14 +6,6 @@ import './index.css';
 import TODOList from './App';
 import AppAPI from './api/AppAPI'
 
-async function getList(listId) {
-    const list = await AppAPI.getAPI().getList(listId)
-    if (list instanceof Array) {
-        return {success: true, list: list[0]}
-    } else {
-        return {success: false, list: NaN}
-    }
-}
 
 class ErrorPage extends React.Component {
     render() {
