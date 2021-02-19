@@ -7,21 +7,22 @@ from models.list import List
 from tools.utils import *
 
 
-class ListAPI(Resource):
+class GetList(Resource):
     @error_handler
     def get(self, list_id):
         output = List.objects(listId=list_id)
         return generate_json_response(result=output)
 
-    @error_handler
-    def delete(self, list_id):
-        output = {'listId': List.objects(listId=list_id).delete()}
-        return generate_json_response(result=output)
-
-class ListCreateAPI(Resource):
+class CreateList(Resource):
     @error_handler
     def post(self):
         #data = request.get_json()
         post_user = List().save()
         output = post_user
+        return generate_json_response(result=output)
+
+class DeleteList(Resource):
+    @error_handler
+    def post(self, list_id):
+        output = {'listId': List.objects(listId=list_id).delete()}
         return generate_json_response(result=output)
