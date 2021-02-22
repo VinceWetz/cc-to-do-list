@@ -6,7 +6,7 @@ export default class AppAPI {
 
     static #api = null;
 
-    #appServerBaseURL = 'http://172.26.4.173:5000';
+    #appServerBaseURL = 'https://18.198.252.55:5000';
 
     // fetch and return list of json objects
 
