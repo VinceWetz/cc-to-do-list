@@ -44,7 +44,8 @@ class WelcomePage extends React.Component {
         super(props);
         this.state = {
             list: NaN,
-            listId: ''
+            listId: '',
+            redirect: true
         };
     }
 
@@ -56,19 +57,28 @@ class WelcomePage extends React.Component {
     }
 
     handleChange = (e) => {
+        console.log(e.target.value)
         this.setState({
-            listId: e.target.value
+            listId: e.target.value,
         })
     }
 
     handleJoin = async (e) => {
-        if(this.state.listId)
-            return <Redirect to={'/list/' + this.state.listId} />
-        // alert('/list/' + this.state.listId);
-        else 
-            alert('Please enter a List id');
+        
+            // Prüfen, ob Liste mit ID existiert und in State speichern
+            const list = await AppAPI.getAPI().getList(this.state.listId)
+            if (list.length >= 1) {
+                this.setState({success: true, list: list[0]})
+            } else {
+                this.setState({success: false, list: NaN})
+            }
+         
+        // const list = await AppAPI.getAPI().getList(this.state.listId)
+        // console.log(list)
+        // this.setState({
+        //     list: list
+        // })
     }
-
     
     renderRedirect = () => {
         if (this.state.list) {
@@ -86,8 +96,9 @@ class WelcomePage extends React.Component {
                 <br></br>
 
                 <form onSubmit={this.handleJoin}>                                        
-                    <input type="text" value={this.state.listId} onChange={this.handleChange} />                    
-                    <input type="submit" className= "btn join" value="Submit" />
+                    <input type="text" value={this.state.listId} onChange={this.handleChange} /> 
+                                    
+                    <input type="submit" className= "btn" value="Submit" />
                 </form>     
             </div>
         )
