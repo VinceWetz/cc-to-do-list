@@ -4,7 +4,7 @@ import Todo from "./components/Todo";
 import AppAPI from "./api/AppAPI.js"
 import TODO from "./api/TODO";
 
-import img from './logo512.png';
+import img from './Punguinkopf.png';
 
 
 
