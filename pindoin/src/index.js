@@ -8,10 +8,32 @@ import AppAPI from './api/AppAPI'
 
 
 class ErrorPage extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            redirect: false
+        };
+    }
+
+    handleRestart = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to={'/'} />
+        }
+    }
+//
     render() {
         return (
             <div>
                 <h1>Oops... this list does not exist!</h1>
+                {this.renderRedirect()}
+                <button type="button" className="btn" onClick={this.handleRestart}>Return to home</button>
             </div>
         )
     }
