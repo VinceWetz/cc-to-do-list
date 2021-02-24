@@ -65,19 +65,24 @@ class TODOList extends React.Component{
 render(){
     return (
         <div className="todoapp stack-large">
-            <h2 id="list-heading">{"List: " + this.state.list.getListId()}</h2>
-            <button type="button" className="btn" id="delete-list" onClick={this.deleteList}>Delete List &#128465;</button> 
-          <Form addTODO={this.addTODO} />
-          <div className="filters btn-group stack-exception">
-          </div>
-          <ul
-            role="list"
-            className="todo-list stack-large stack-exception"
-            aria-labelledby="list-heading"
-          >
-            {this.state.todos}
-          </ul>
-        </div>
+            <div class="heading-div">
+                <h2 id="list-heading">{"List ID: " + this.state.list.getListId()}</h2>
+            </div>
+            <div class="heading-div right-div">
+                <button type="button" className="btn" id="delete-list" onClick={this.deleteList}>Delete List &#128465;</button> 
+            </div>
+            
+            <Form addTODO={this.addTODO} />
+            <div className="filters btn-group stack-exception">
+            </div>
+            <ul
+                role="list"
+                className="todo-list stack-large stack-exception"
+                aria-labelledby="list-heading"
+            >
+                {this.state.todos}
+            </ul>
+            </div>
       );
     }
 }

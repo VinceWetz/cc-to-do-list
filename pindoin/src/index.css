@@ -290,3 +290,26 @@ body {
 .c-cb > input[type="checkbox"]:checked + label::after {
   opacity: 1;
 }
+
+
+
+/* centering */
+.centered {
+  text-align: center;
+}
+input {
+  margin-left: 5px;
+}
+
+
+.heading-div {
+  display: inline-block;
+}
+
+.right-div {
+  float: right;
+}
+
+.title-buttons {
+  display: inline-block;
+}

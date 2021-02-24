@@ -30,8 +30,9 @@ class ErrorPage extends React.Component {
 //
     render() {
         return (
-            <div>
-                <h1>Oops... this list does not exist!</h1>
+            <div class="centered">
+                <h2>Oops... this list doesn't exist (anymore)!</h2>
+                <p> </p>
                 {this.renderRedirect()}
                 <button type="button" className="btn" onClick={this.handleRestart}>Return to home</button>
             </div>
@@ -64,8 +65,7 @@ class WelcomePage extends React.Component {
     }
 
     handleJoin = async (e) => {
-
-        
+        if (this.state.listId) {
             // Prüfen, ob Liste mit ID existiert und in State speichern
             e.preventDefault();
             const list = await AppAPI.getAPI().getList(this.state.listId)
@@ -74,7 +74,7 @@ class WelcomePage extends React.Component {
             } else {
                 this.setState({success: false, list: NaN})
             }
-
+        }
     }
     
     renderRedirect = () => {
@@ -85,18 +85,21 @@ class WelcomePage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="centered">
                 <img src={img} />
                 <h1>Welcome to PinDOin!</h1>
+                <p>You can create a new list or join an existing one!</p>
                 {this.renderRedirect()}
-                <button type="button" className="btn" onClick={this.handleCreate}>Create a new list!</button>
-                <br></br>
+                <button type="button" className="btn" onClick={this.handleCreate}>Create a new list</button>
+                <p>OR</p>
 
-                <form onSubmit={this.handleJoin}>                                        
-                    <input type="text" value={this.state.listId} onChange={this.handleChange} /> 
-                                    
-                    <input type="submit" className= "btn" value="Submit" />
-                </form>     
+                <div>
+                    <form onSubmit={this.handleJoin}>           
+                        <input type="text" placeholder="Enter List ID here" value={this.state.listId} onChange={this.handleChange} /> 
+                        <input type="submit" className= "btn" value="Join" />
+                    </form>     
+                </div>
+                
             </div>
         )
     }
@@ -132,7 +135,6 @@ function App() {
                 <Switch>
                     <Route path="/list/:listId" render={(props) => <ListRoute listId={props.match.params.listId}/>} />
                     <Route path="/" children={<WelcomePage />} />
-
                 </Switch>
         </Router>
         )}
