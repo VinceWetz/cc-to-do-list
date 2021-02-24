@@ -65,15 +65,14 @@ class WelcomePage extends React.Component {
 
     handleJoin = async (e) => {
 
-        
-            // Prüfen, ob Liste mit ID existiert und in State speichern
-            e.preventDefault();
-            const list = await AppAPI.getAPI().getList(this.state.listId)
-            if (list.length >= 1) {
-                this.setState({success: true, list: list[0]})
-            } else {
-                this.setState({success: false, list: NaN})
-            }
+        // Prüfen, ob Liste mit ID existiert und in State speichern
+        e.preventDefault();
+        const list = await AppAPI.getAPI().getList(this.state.listId)
+        if (list.length >= 1) {
+            this.setState({success: true, list: list[0]})
+        } else {
+            this.setState({success: false, list: NaN})
+        }
 
     }
     
