@@ -21,7 +21,8 @@ class WelcomePage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            list: NaN
+            list: NaN,
+            listId: ''
         };
     }
 
@@ -32,6 +33,21 @@ class WelcomePage extends React.Component {
         })
     }
 
+    handleChange = (e) => {
+        this.setState({
+            listId: e.target.value
+        })
+    }
+
+    handleJoin = async (e) => {
+        if(this.state.listId)
+            return <Redirect to={'/list/' + this.state.listId} />
+        // alert('/list/' + this.state.listId);
+        else 
+            alert('Please enter a List id');
+    }
+
+    
     renderRedirect = () => {
         if (this.state.list) {
             return <Redirect to={'/list/' + this.state.list.getListId()} />
@@ -44,6 +60,12 @@ class WelcomePage extends React.Component {
                 <h1>Welcome to pinDOin!</h1>
                 {this.renderRedirect()}
                 <button type="button" className="btn" onClick={this.handleCreate}>Create a new list!</button>
+                <br></br>
+
+                <form onSubmit={this.handleJoin}>                                        
+                    <input type="text" value={this.state.listId} onChange={this.handleChange} />                    
+                    <input type="submit" className= "btn join" value="Submit" />
+                </form>     
             </div>
         )
     }
