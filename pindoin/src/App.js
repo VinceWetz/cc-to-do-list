@@ -54,12 +54,19 @@ class TODOList extends React.Component{
         await AppAPI.getAPI().updateTODO(this.state.list, todo)
         this.loadTODOs()
     }
+
+    deleteList = async () => {
+        await AppAPI.getAPI().deleteList(this.state.list.getListId())
+        this.state.list = NaN
+        window.location.reload();
+    }
     
 
 render(){
     return (
         <div className="todoapp stack-large">
-            <h2 id="list-heading">{"List: " + this.state.list.getListId()}</h2>  
+            <h2 id="list-heading">{"List: " + this.state.list.getListId()}</h2>
+            <button type="button" className="btn" id="delete-list" onClick={this.deleteList}>Delete List &#128465;</button> 
           <Form addTODO={this.addTODO} />
           <div className="filters btn-group stack-exception">
           </div>

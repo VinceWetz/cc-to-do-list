@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import img from './../logo512.png';
 
 
 class Form extends React.Component {
@@ -27,6 +27,9 @@ class Form extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        {/* <div>
+        <img src={img} />
+        </div> */}
         <h2 className="label-wrapper">
           <label htmlFor="new-todo-input" className="label__lg">
             What needs to be done?

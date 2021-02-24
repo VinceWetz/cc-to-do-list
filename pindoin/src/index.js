@@ -1,17 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-
+import img from './logo512.png';
 import './index.css';
 import TODOList from './App';
 import AppAPI from './api/AppAPI'
 
 
 class ErrorPage extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            redirect: false
+        };
+    }
+
+    handleRestart = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to={'/'} />
+        }
+    }
+//
     render() {
         return (
             <div>
                 <h1>Oops... this list does not exist!</h1>
+                {this.renderRedirect()}
+                <button type="button" className="btn" onClick={this.handleRestart}>Return to home</button>
             </div>
         )
     }
@@ -57,7 +79,8 @@ class WelcomePage extends React.Component {
     render() {
         return (
             <div>
-                <h1>Welcome to pinDOin!</h1>
+                <img src={img} />
+                <h1>Welcome to PinDOin!</h1>
                 {this.renderRedirect()}
                 <button type="button" className="btn" onClick={this.handleCreate}>Create a new list!</button>
                 <br></br>
