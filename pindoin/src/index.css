@@ -306,10 +306,17 @@ input {
   display: inline-block;
 }
 
+.left-div {
+  float: left;
+}
 .right-div {
   float: right;
 }
 
 .title-buttons {
   display: inline-block;
+}
+
+.label-wrapper {
+  margin-top: 20px
 }

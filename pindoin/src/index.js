@@ -30,7 +30,7 @@ class ErrorPage extends React.Component {
 //
     render() {
         return (
-            <div class="centered">
+            <div className="centered">
                 <h2>Oops... this list doesn't exist (anymore)!</h2>
                 <p> </p>
                 {this.renderRedirect()}
@@ -85,7 +85,7 @@ class WelcomePage extends React.Component {
 
     render() {
         return (
-            <div class="centered">
+            <div className="centered">
                 <img src={img} />
                 <h1>Welcome to PinDOin!</h1>
                 <p>You can create a new list or join an existing one!</p>

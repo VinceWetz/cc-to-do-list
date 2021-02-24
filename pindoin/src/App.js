@@ -4,6 +4,9 @@ import Todo from "./components/Todo";
 import AppAPI from "./api/AppAPI.js"
 import TODO from "./api/TODO";
 
+import img from './logo512.png';
+
+
 
 class TODOList extends React.Component{
     constructor(props){
@@ -64,11 +67,16 @@ class TODOList extends React.Component{
 
 render(){
     return (
-        <div className="todoapp stack-large">
-            <div class="heading-div">
+        <div >
+            <div className="centered">
+            <img src={img} />
+
+            </div>
+            <div className="todoapp stack-large">
+            <div className="heading-div left-div">
                 <h2 id="list-heading">{"List ID: " + this.state.list.getListId()}</h2>
             </div>
-            <div class="heading-div right-div">
+            <div className="heading-div right-div">
                 <button type="button" className="btn" id="delete-list" onClick={this.deleteList}>Delete List &#128465;</button> 
             </div>
             
@@ -83,6 +91,9 @@ render(){
                 {this.state.todos}
             </ul>
             </div>
+
+        </div>
+
       );
     }
 }
