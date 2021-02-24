@@ -56,4 +56,4 @@ def get_flask_app(config: dict = None) -> app.Flask:
 if __name__ == '__main__':
     # Main entry point when run in stand-alone mode.
     app = get_flask_app()
-    app.run(host='0.0.0.0', ssl_context='adhoc')
+    app.run(host='0.0.0.0'), #ssl_context='adhoc')

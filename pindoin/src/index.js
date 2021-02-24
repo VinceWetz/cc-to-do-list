@@ -88,7 +88,7 @@ class WelcomePage extends React.Component {
             <div className="centered">
                 <img src={img} />
                 <h1>Welcome to PinDOin!</h1>
-                <p>You can create a new list or join an existing one!</p>
+                <p>You can create a new list or join an existing one</p>
                 {this.renderRedirect()}
                 <button type="button" className="btn" onClick={this.handleCreate}>Create a new list</button>
                 <p>OR</p>
