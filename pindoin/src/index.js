@@ -58,7 +58,6 @@ class WelcomePage extends React.Component {
     }
 
     handleChange = (e) => {
-        console.log(e.target.value)
         this.setState({
             listId: e.target.value,
         })
@@ -75,6 +74,9 @@ class WelcomePage extends React.Component {
                 this.setState({success: false, list: NaN})
             }
         }
+        this.setState({
+            listId: "",
+        })
     }
     
     renderRedirect = () => {
@@ -95,7 +97,7 @@ class WelcomePage extends React.Component {
 
                 <div>
                     <form onSubmit={this.handleJoin}>           
-                        <input type="text" placeholder="Enter List ID here" value={this.state.listId} onChange={this.handleChange} /> 
+                        <input type="text" className= "btn" placeholder="Enter List ID here" value={this.state.listId} onChange={this.handleChange} /> 
                         <input type="submit" className= "btn" value="Join" />
                     </form>     
                 </div>
