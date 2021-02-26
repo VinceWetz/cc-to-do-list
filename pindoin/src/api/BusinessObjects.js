@@ -1,21 +1,21 @@
 export default class BusinessObject {
 
     constructor(category){
-        // this.id = 0;
+        this.createTimestamp = 1613131072144923000;
         this.category = category;
     }
 
-    // setId(id){
-    //     this.id = id
-    // }
+    setCreteTimestamp(createTimestamp){
+        this.createTimestamp = createTimestamp
+    }
 
     setCategory(category){
         this.category = category
     }
 
-    // getId(){
-    //     return this.id
-    // }
+    getCreateTimestamp(){
+        return this.createTimestamp
+    }
 
     getCategory(){
         return this.category
