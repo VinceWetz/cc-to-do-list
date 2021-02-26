@@ -2,17 +2,22 @@ import BusinessObject from './BusinessObjects';
 import List from './List';
 
 export default class TODO extends BusinessObject{
-    constructor(category, task){
+    constructor(category, task, listId){
         super(category)
         this.todoId = 0;
+        this.listId = listId
         this.task = task;
         this.checked = false;
-        this.createTimestamp = 1613131072144923000 //Math.floor(new Date().getTime())
+        // this.createTimestamp = 1613131072144923000 //Math.floor(new Date().getTime())
         this.checkTimestamp = 1613131072144923000//Math.floor(new Date().getTime())
     }
 
     setTodoId(todoId){
         this.todoId = todoId
+    }
+
+    setListId(listId){
+        this.listId = listId
     }
 
     setTask(task){
@@ -23,9 +28,9 @@ export default class TODO extends BusinessObject{
         this.checked = checked
     }    
     
-    setCreateTimestamp(createTimestamp){
-        this.createTimestamp = createTimestamp
-    }
+    // setCreateTimestamp(createTimestamp){
+    //     this.createTimestamp = createTimestamp
+    // }
 
     setCheckedTimestamp(checkTimestamp){
         this.checkTimestamp = checkTimestamp
@@ -33,6 +38,10 @@ export default class TODO extends BusinessObject{
 
     getTodoId(){
         return this.todoId
+    }
+
+    getListId(){
+        return this.listId
     }
 
     getTask(){
@@ -43,9 +52,9 @@ export default class TODO extends BusinessObject{
         return this.checked
     }
 
-    getCreateTimestamp(){
-        return this.createTimestamp
-    }
+    // getCreateTimestamp(){
+    //     return this.createTimestamp
+    // }
 
     getCheckedTimestamp(){
         return this.checkTimestamp

@@ -3,35 +3,36 @@ import TODO from  './TODO';
 
 export default class List extends BusinessObject{
 
-constructor(category, task){
+constructor(category){
     super(category)
     this.listId = 0;
-    this.task = task; 
+    // this.task = task; 
 }
 
 setListId(listId){
     this.listId = listId
 }
 
-setCategory(category){
-    this.category = category
-}
+// setCategory(category){
+//     this.category = category
+// }
 
-setTaskName(task){
-    this.task = task
-}
+// setTaskName(task){
+//     this.task = task
+// }
 
-getCategory(){
-    return this.category
-}
+// getCategory(){
+//     return this.category
+// }
 
 getListId(){
     return this.listId
 }
 
-getTaskName(){
-    return this.task
-}
+// getTaskName(){
+//     return this.task
+// }
+
     // Array List
     static fromJSON(list) {
         let result = [];
@@ -50,4 +51,3 @@ getTaskName(){
     }
 
 }
-
